@@ -39,14 +39,14 @@ function SceneManager:draw()
     end
 end
 
-function SceneManager:check_for_sprites(x,y)
+function SceneManager:mousepressed(x,y)
     if self.current_scene ~= nil then
-        self.current_scene:check_for_sprites(x,y)
+        self.current_scene:mousepressed(x,y)
     end
 end
 
-function SceneManager:clear_sprite_drags()
-    self.current_scene:clear_sprite_drags()
+function SceneManager:mousereleased()
+    self.current_scene:mousereleased()
 end
 
 function SceneManager:mousemoved(x,y,dx,dy,istouch)

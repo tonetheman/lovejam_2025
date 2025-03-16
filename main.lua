@@ -13,12 +13,12 @@ local main_scene = nil
 
 function love.mousepressed(x,y,button,istouch,presses)
     print("pressed",x,y,button,istouch,presses)
-    sm:check_for_sprites(x,y)
+    sm:mousepressed(x,y)
 end
 
 function love.mousereleased(x, y, button, istouch, presses)
     print("released",x,y)
-    sm:clear_sprite_drags()
+    sm:mousereleased()
 end
 
 function love.mousemoved(x, y, dx, dy, istouch)

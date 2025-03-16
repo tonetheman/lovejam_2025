@@ -16,13 +16,14 @@ function Scene:update(dt)
 end
 
 function Scene:draw()
+    -- TODO: draw grid
+
     for k,v in pairs(self.sprites) do
         v:draw()
     end
 end
 
-function Scene:check_for_sprites(x,y)
-    print("check for sprites in scene!",x,y)
+function Scene:mousepressed(x,y)
     for k,v in pairs(self.sprites) do
         local xpos = v.xpos
         local ypos = v.ypos
@@ -30,14 +31,13 @@ function Scene:check_for_sprites(x,y)
         local h = v.h
         if x>=xpos and x <=xpos+w then
             if y>=ypos and y<ypos+h then
-                print("hit")
                 v.is_being_dragged = true
             end
         end
     end
 end
 
-function Scene:clear_sprite_drags()
+function Scene:mousereleased()
     for k,v in pairs(self.sprites) do
         if v.is_being_dragged then
             v.is_being_dragged = false
