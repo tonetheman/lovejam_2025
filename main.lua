@@ -1,50 +1,54 @@
 
+
 local Object = require("classic")
 
-local SceneManager = Object:extend()
-function SceneManager:new()
-    self.scene_list = {}
-    self.current_scene = nil
+local SceneManager = require("scene_manager")
+
+local ImageLoader = Object:extend()
+function ImageLoader:new()
+    self.imgs = {}
+    self.imgs["f"] = love.graphics.newImage("assets/runeGrey_rectangle_001.png")
 end
 
-function SceneManager:add(s)
-    table.insert(self.scene_list,s)
+local Sprite = Object:extend()
+function Sprite:new(key,xpos,ypos)
+    
 end
-function SceneManager:set(key)
-    -- set this scene to be the current scene
-
-end
-function SceneManager:update(dt)
-    if self.current_scene ~= nil then
-        self.current_scene:update(dt)
-    end
-end
-function SceneManager:draw()
-    if self.current_scene ~= nil then
-        self.current_scene:draw()
-    end
+function Sprite:draw()
+    love.graphics.draw()
 end
 
 local Scene = Object:extend()
 function Scene:new(key)
     self.key = key
+    self.data = {
+        {1,1,0,0,1,1,},
+        {0,0,0,0,1,1},
+    }
+    self.sprites = {}
+end
+function Scene:add_sprite(s)
+    table.insert(self.sprites,s)
 end
 function Scene:update(dt)
 end
 function Scene:draw()
+    for k,v in pairs(self.sprites) do
+        v:draw()
+    end
 end
 
 
 local sm = nil
 local main_scene = nil
-
+local img_loader = nil
 
 function love.load()
+    img_loader = ImageLoader()
     sm = SceneManager()
     main_scene = Scene("main")
     sm:add(main_scene)
     sm:set("main")
-    
 end
 
 
