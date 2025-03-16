@@ -1,7 +1,5 @@
 
 
-local Object = require("classic")
-
 local SceneManager = Object:extend()
 function SceneManager:new()
     self.scene_list = {}
