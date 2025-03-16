@@ -12,12 +12,10 @@ function SceneManager:add(s)
 end
 
 function SceneManager:set(key)
-    print("set is called",key)
     -- set this scene to be the current scene
     for k,v in pairs(self.scene_list) do
         print("key",k)
         if k==key then
-            print("found in set")
             -- TODO let the current_scene
             -- have a chance to close things
             -- first

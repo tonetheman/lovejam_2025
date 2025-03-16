@@ -6,9 +6,21 @@ function Scene:new(key)
         {0,0,0,0,1,1},
     }
     self.sprites = {}
+    self.grid = {}
+    for i=1,9 do
+        self.grid[i] = {0,0,0,0,0,0,0,0,0,0}
+    end
+
+    -- get refernce to grid background
+    self.gbimg = img_loader.imgs["bg_box"]
 end
 
 function Scene:add_sprite(s)
+    -- snap to grid
+    local xpos = s.xpos
+    local ypos = s.ypos
+    s.xpos = xpos-(xpos%64)
+    s.ypos = ypos-(ypos%64)
     table.insert(self.sprites,s)
 end
 
@@ -16,8 +28,15 @@ function Scene:update(dt)
 end
 
 function Scene:draw()
-    -- TODO: draw grid
+    -- draw grid
+    for i=1,9 do
+        for j=1,9 do
+            local gval = self.grid[i][j]
+            love.graphics.draw(self.gbimg,(i-1)*64,(j-1)*64)
+        end
+    end
 
+    -- draw sprites
     for k,v in pairs(self.sprites) do
         v:draw()
     end
@@ -48,6 +67,11 @@ end
 function Scene:mousemoved(x,y,dx,dy,istouch)
     for k,v in pairs(self.sprites) do
         if v.is_being_dragged then
+            
+            -- TODO handle snap to grid here
+            local xpos = v.xpos
+            local ypos = v.ypos
+
             v:move(x,y)
         end
     end
