@@ -1,8 +1,11 @@
 
 
 local Object = require("classic")
-
 local SceneManager = require("scene_manager")
+
+--globals
+img_loader = nil
+
 
 local ImageLoader = Object:extend()
 function ImageLoader:new()
@@ -12,10 +15,12 @@ end
 
 local Sprite = Object:extend()
 function Sprite:new(key,xpos,ypos)
-    
+    self.image = img_loader.imgs[key]
+    self.xpos = xpos
+    self.ypos = ypos
 end
 function Sprite:draw()
-    love.graphics.draw()
+    love.graphics.draw(self.image,self.xpos,self.ypos)
 end
 
 local Scene = Object:extend()
@@ -41,12 +46,12 @@ end
 
 local sm = nil
 local main_scene = nil
-local img_loader = nil
 
 function love.load()
     img_loader = ImageLoader()
     sm = SceneManager()
     main_scene = Scene("main")
+    main_scene:add_sprite(Sprite("f",100,100))
     sm:add(main_scene)
     sm:set("main")
 end
