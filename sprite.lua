@@ -20,6 +20,4 @@ function Sprite:draw()
     love.graphics.draw(self.image,self.xpos,self.ypos)
 end
 
-
-
 return Sprite

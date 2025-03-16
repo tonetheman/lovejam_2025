@@ -37,4 +37,20 @@ function Scene:check_for_sprites(x,y)
     end
 end
 
+function Scene:clear_sprite_drags()
+    for k,v in pairs(self.sprites) do
+        if v.is_being_dragged then
+            v.is_being_dragged = false
+        end
+    end
+end
+
+function Scene:mousemoved(x,y,dx,dy,istouch)
+    for k,v in pairs(self.sprites) do
+        if v.is_being_dragged then
+            v:move(x,y)
+        end
+    end
+end
+
 return Scene
