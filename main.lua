@@ -1,47 +1,15 @@
 
-
-local Object = require("classic")
-local SceneManager = require("scene_manager")
-
---globals
+--global
+Object = require("classic")
 img_loader = nil
 
+local SceneManager = require("scene_manager")
+local ImageLoader = require("image_loader")
+local Sprite = require("sprite")
+local Scene = require("scene")
 
-local ImageLoader = Object:extend()
-function ImageLoader:new()
-    self.imgs = {}
-    self.imgs["f"] = love.graphics.newImage("assets/runeGrey_rectangle_001.png")
-end
 
-local Sprite = Object:extend()
-function Sprite:new(key,xpos,ypos)
-    self.image = img_loader.imgs[key]
-    self.xpos = xpos
-    self.ypos = ypos
-end
-function Sprite:draw()
-    love.graphics.draw(self.image,self.xpos,self.ypos)
-end
 
-local Scene = Object:extend()
-function Scene:new(key)
-    self.key = key
-    self.data = {
-        {1,1,0,0,1,1,},
-        {0,0,0,0,1,1},
-    }
-    self.sprites = {}
-end
-function Scene:add_sprite(s)
-    table.insert(self.sprites,s)
-end
-function Scene:update(dt)
-end
-function Scene:draw()
-    for k,v in pairs(self.sprites) do
-        v:draw()
-    end
-end
 
 
 local sm = nil
