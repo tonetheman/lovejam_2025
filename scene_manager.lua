@@ -10,6 +10,7 @@ function SceneManager:add(s)
     self.scene_list[s.key]=s
     -- table.insert(self.scene_list,s)
 end
+
 function SceneManager:set(key)
     print("set is called",key)
     -- set this scene to be the current scene
@@ -25,14 +26,22 @@ function SceneManager:set(key)
         end
     end
 end
+
 function SceneManager:update(dt)
     if self.current_scene ~= nil then
         self.current_scene:update(dt)
     end
 end
+
 function SceneManager:draw()
     if self.current_scene ~= nil then
         self.current_scene:draw()
+    end
+end
+
+function SceneManager:check_for_sprites(x,y)
+    if self.current_scene ~= nil then
+        self.current_scene:check_for_sprites(x,y)
     end
 end
 

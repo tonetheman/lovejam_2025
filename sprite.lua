@@ -1,9 +1,11 @@
 
 local Sprite = Object:extend()
-function Sprite:new(key,xpos,ypos)
+function Sprite:new(key,xpos,ypos,w,h)
     self.image = img_loader.imgs[key]
     self.xpos = xpos
     self.ypos = ypos
+    self.w = w
+    self.h = h
 end
 function Sprite:draw()
     love.graphics.draw(self.image,self.xpos,self.ypos)

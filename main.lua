@@ -8,27 +8,39 @@ local ImageLoader = require("image_loader")
 local Sprite = require("sprite")
 local Scene = require("scene")
 
-
-
-
-
 local sm = nil
 local main_scene = nil
+
+function check_for_sprites(x,y)
+    -- DO SOMETHING HERE hahaha
+    sm:check_for_sprites(x,y)
+end
+
+function love.mousepressed(x,y,button,istouch,presses)
+    print("pressed",x,y)
+    check_for_sprites(x,y)
+end
+
+function love.mousereleased(x, y, button, istouch, presses)
+    print("released",x,y)
+end
+
+function love.mousemoved(x, y, dx, dy, istouch)
+end
+
 
 function love.load()
     img_loader = ImageLoader()
     sm = SceneManager()
     main_scene = Scene("main")
-    main_scene:add_sprite(Sprite("f",100,100))
+    main_scene:add_sprite(Sprite("f",100,100,64,64))
     sm:add(main_scene)
     sm:set("main")
 end
 
-
 function love.update(dt)
     sm:update(dt)
 end
-
 
 function love.draw()
     sm:draw()
