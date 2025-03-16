@@ -31,6 +31,7 @@ function Scene:check_for_sprites(x,y)
         if x>=xpos and x <=xpos+w then
             if y>=ypos and y<ypos+h then
                 print("hit")
+                v.is_being_dragged = true
             end
         end
     end

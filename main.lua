@@ -11,23 +11,19 @@ local Scene = require("scene")
 local sm = nil
 local main_scene = nil
 
-function check_for_sprites(x,y)
-    -- DO SOMETHING HERE hahaha
-    sm:check_for_sprites(x,y)
-end
-
 function love.mousepressed(x,y,button,istouch,presses)
-    print("pressed",x,y)
-    check_for_sprites(x,y)
+    print("pressed",x,y,button,istouch,presses)
+    sm:check_for_sprites(x,y)
 end
 
 function love.mousereleased(x, y, button, istouch, presses)
     print("released",x,y)
+    sm:clear_sprite_drags()
 end
 
 function love.mousemoved(x, y, dx, dy, istouch)
+    sm:mousemoved(x,y,dx,dy,istouch)
 end
-
 
 function love.load()
     img_loader = ImageLoader()

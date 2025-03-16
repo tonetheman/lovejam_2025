@@ -45,4 +45,18 @@ function SceneManager:check_for_sprites(x,y)
     end
 end
 
+function SceneManager:clear_sprite_drags()
+    for k,v in pairs(self.scene_list) do
+        v.is_being_dragged = false
+    end
+end
+
+function SceneManager:mousemoved(x,y,dx,dy,istouch)
+    for k,v in pairs(self.scene_list) do
+        if v.is_being_dragged then
+            v:move(x,y)
+        end
+    end
+end
+
 return SceneManager
